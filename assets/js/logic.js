@@ -18,7 +18,7 @@ const initials = document.getElementById("initials"); // input for initials
 const submitButton = document.getElementById("submit"); // submit button
 const highScores = document.getElementById("highscores"); // ol element from highscores html file
 
-// function to start quiz
+// Function to start quiz
 function startQuiz() {
     startScreen.classList.add("hide"); // hides start screen
     questions.classList.remove("hide"); // shows questions screen
@@ -28,11 +28,11 @@ function startQuiz() {
     // Calls function to display question 
     displayQuestion(quizQuestions[questionNumber]);
 }
-// Sets the timer and countdown and displays time
+// Function to set the timer and countdown and display time
 function setTime() {
-     timeInterval = setInterval(function () {
+    timeInterval = setInterval(function () {
         secondsleft--;
-        timer.textContent = secondsleft; 
+        timer.textContent = secondsleft;
     }, 1000);
 }
 
@@ -58,7 +58,7 @@ function checkAnswer(event) {
     const answerIndex = event.target.dataset.index; // when button is clicked grab answer index from answers array in question object
     const answer = currentQuestion.answers[answerIndex]; // variable answer is the answers of the current question 
     if (answer.correct) { // if answer correct is true
-        score+= 5; // adds 5 point to score
+        score += 5; // adds 5 point to score
         feedback.textContent = "Correct"; // displays Correct
         const audio = new Audio("./assets/sfx/correct.wav"); // stores audio for correct answer
         audio.play(); // play method to play sound
@@ -70,7 +70,7 @@ function checkAnswer(event) {
     };
     questionNumber++; // go to next question
     if (questionNumber < quizQuestions.length) {  // if there is a question in the array
-    displayQuestion(quizQuestions[questionNumber]); // display question
+        displayQuestion(quizQuestions[questionNumber]); // display question
     }
 
     endQuiz(); // checks if the quiz should end
@@ -92,4 +92,14 @@ function endQuiz() {
 }
 
 // session storage 
+function submitInitials(event) {
+    event.preventDefault();
+    if (initials.value.trim() !== "") {
+        sessionStorage.setItem("initials", initials.value); // save data
+        window.location.href = "https://naike-b.github.io/Code-Quiz/highscores.html";
+    }
+    highScores.textContent = initials.value.score;
+}
+submitButton.addEventListener("click", submitInitials);
+
 
