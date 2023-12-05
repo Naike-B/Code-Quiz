@@ -1,3 +1,5 @@
 window.onload = function () {
-    initials = sessionStorage.getItem("initials");
+    initials = localStorage.getItem("initials");
+    console.log(initials);
   }
+

@@ -14,7 +14,7 @@ const answerButtons = document.getElementById("choices"); // div to include the 
 const feedback = document.getElementById("feedback"); // div to include feedback correct/wrong
 const endScreen = document.getElementById("end-screen"); // end screen
 const finalScore = document.getElementById("final-score"); // span to include final score
-const initials = document.getElementById("initials"); // input for initials
+let initialsInput = document.getElementById("initials"); // input for initials
 const submitButton = document.getElementById("submit"); // submit button
 const highScores = document.getElementById("highscores"); // ol element from highscores html file
 
@@ -85,21 +85,25 @@ function endQuiz() {
         feedback.classList.add("hide"); // hides feedback
         endScreen.classList.remove("hide"); // shows end screen
         finalScore.textContent = score; // changes final score element to display score
-        console.log(questionNumber);
-        console.log(quizQuestions.length);
-        console.log(score);
     };
 }
 
-// session storage 
-function submitInitials(event) {
-    event.preventDefault();
-    if (initials.value.trim() !== "") {
-        sessionStorage.setItem("initials", initials.value); // save data
-        window.location.href = "https://naike-b.github.io/Code-Quiz/highscores.html";
-    }
-    highScores.textContent = initials.value.score;
+// Function to handle form submission
+function submitInitials(event) { 
+    event.preventDefault(); // prevent form from submitting and refreshing the page
+    if (initialsInput.value) { // check if the intials input has a value
+        let scores = JSON.parse(localStorage.getItem("scores")); // gets scores from local storage
+        if(scores == null){ // if no score in local storage intialise an empty array
+            scores = [];
+        }
+        scores.push({"initials": initialsInput.value, "score": score }); // push the score to the scores array
+        localStorage.setItem("scores", JSON.stringify(scores));// saves the updated scores array to local storage
+     
+        window.location.href = "./highscores.html"; // redirect to high scores page
+    };
+   
 }
+// Adds event listener to the submit button to call submitInitials function when clicked
 submitButton.addEventListener("click", submitInitials);
 
 
