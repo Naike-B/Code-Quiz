@@ -14,6 +14,8 @@ No installation required.
 
 ## Usage
 
+Navigate to [Coding Quiz](https://naike-b.github.io/Code-Quiz/index.html)
+
 This what the application looks like:
 
 ![alt text](assets/images/quiz-1.png)
