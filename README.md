@@ -13,10 +13,10 @@ No installation required.
 To access the application the user needs to navigate to [Coding Quiz](https://naike-b.github.io/Code-Quiz/index.html) .  
 To start the quiz the user needs to click the 'Start quiz' button.  
 The user has 75 seconds to answer 12 multiple choice questions.  
-There are 4 available answers for each question. Only 1 answer is correct.  
+There are 4 available answers for each question (only 1 answer is correct).  
 For every correct answer, the user gets 5 points.  
-For any wrong answer the user loses 10 seconds.  
-The quiz ends when the user answered all the question or the time run out.  
+For every wrong answer the user loses 10 seconds.  
+The quiz ends when the user answered all the questions or the time runs out.  
 Then the user's final score is displayed, and the user has the option to save the score and his/her initials, clicking on the 'Submit' button.  
 The saved score and initials are displayed on a different page including high scores.  
 From here the user can go back to the start page clicking on the 'Go back button' or clear the high scores on the page clicking the 'Clear high scores' button.  
