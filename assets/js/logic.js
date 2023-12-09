@@ -1,24 +1,23 @@
 // Variables 
 let secondsleft = 76; // variable to set the seconds for the timer
-let timeInterval; // variable for time interval
+let timeInterval; // variable to store time interval
 let questionNumber; // variable to keep track of the current question in the quiz
 let score = 0; // variable to store the score
 
 // Variables for DOM manipulation
-const startButton = document.getElementById("start"); // start quiz button
-const startScreen = document.getElementById("start-screen"); // includes the heading the paragraph and the start quiz button
-const questions = document.getElementById("questions"); // questions div that contains the question title and answers buttons
-const timer = document.getElementById("time"); // time span
-const questionTitle = document.getElementById("question-title"); // question title includes the question 
-const answerButtons = document.getElementById("choices"); // div to include the answers buttons
-const feedback = document.getElementById("feedback"); // div to include feedback correct/wrong
-const endScreen = document.getElementById("end-screen"); // end screen
-const finalScore = document.getElementById("final-score"); // span to include final score
-let initialsInput = document.getElementById("initials"); // input for initials
-const submitButton = document.getElementById("submit"); // submit button
-const highScores = document.getElementById("highscores"); // ol element from highscores html file
+const startButton = document.getElementById("start"); // gets HTML element by id and stores it in the variable startButton
+const startScreen = document.getElementById("start-screen"); // gets HTML element by id and stores it in the variable startScreen
+const questions = document.getElementById("questions"); // gets HTML element by id and stores it in the variable questions
+const timer = document.getElementById("time"); // // gets HTML element by id and stores it in the variable timer
+const questionTitle = document.getElementById("question-title"); // gets HTML element by id and stores it in the variable questionTitle 
+const answerButtons = document.getElementById("choices"); // gets HTML element by id and stores it in the variable answerButton
+const feedback = document.getElementById("feedback"); // gets HTML element by id and stores it in the variable feedback
+const endScreen = document.getElementById("end-screen"); // gets HTML element by id and stores it in the variable endScreen
+const finalScore = document.getElementById("final-score"); // gets HTML element by id and stores it in the variable finalScore
+let initialsInput = document.getElementById("initials"); // gets HTML element by id and stores it in the variable initialsInput
+const submitButton = document.getElementById("submit"); // gets HTML element by id and stores it in the variable submitButton
 
-// Function to start quiz
+// Function to start the quiz
 function startQuiz() {
     startScreen.classList.add("hide"); // hides start screen
     questions.classList.remove("hide"); // shows questions screen
@@ -36,7 +35,7 @@ function setTime() {
     }, 1000);
 }
 
-startButton.addEventListener("click", startQuiz); // If user clicks the start button the startQuiz function is triggered
+startButton.addEventListener("click", startQuiz); // If user clicks the start button the startQuiz function is called
 
 // Function to display questions
 function displayQuestion() {
@@ -59,12 +58,12 @@ function checkAnswer(event) {
     const answer = currentQuestion.answers[answerIndex]; // variable answer is the answers of the current question 
     if (answer.correct) { // if answer correct is true
         score += 5; // adds 5 point to score
-        feedback.textContent = "Correct"; // displays Correct
+        feedback.textContent = "Correct!"; // displays Correct
         const audio = new Audio("./assets/sfx/correct.wav"); // stores audio for correct answer
         audio.play(); // play method to play sound
     } else { // if false
         secondsleft -= 10; // deducts 10seconds from timer
-        feedback.textContent = "Wrong"; // displays Wrong
+        feedback.textContent = "Wrong!"; // displays Wrong
         const audio = new Audio("./assets/sfx/incorrect.wav"); // stores audio for incorrect answer
         audio.play(); // play method to play sound
     };
@@ -90,20 +89,19 @@ function endQuiz() {
 
 // Function to handle form submission
 function submitInitials(event) { 
-    event.preventDefault(); // prevent form from submitting and refreshing the page
+    event.preventDefault(); // prevents form from submitting and refreshing the page
     if (initialsInput.value) { // check if the intials input has a value
-        let scores = JSON.parse(localStorage.getItem("scores")); // gets scores from local storage
-        if(scores == null){ // if no score in local storage intialise an empty array
-            scores = [];
+        let scores = JSON.parse(localStorage.getItem("scores")); // parse the "scores" item from localStorage and stores it in the variable scores
+        if(scores == null){ // if no score in localStorage intialise an empty array
+            scores = []; // empty array
         }
-        scores.push({"initials": initialsInput.value, "score": score }); // push the score to the scores array
-        localStorage.setItem("scores", JSON.stringify(scores));// saves the updated scores array to local storage
+        scores.push({"initials": initialsInput.value, "score": score }); // push the initials and score to the scores array
+        localStorage.setItem("scores", JSON.stringify(scores));// saves the updated scores array to localStorage
      
-        window.location.href = "./highscores.html"; // redirect to high scores page
+        window.location.href = "./highscores.html"; // redirect to highscores page
     };
    
 }
-// Adds event listener to the submit button to call submitInitials function when clicked
-submitButton.addEventListener("click", submitInitials);
+submitButton.addEventListener("click", submitInitials); // If user clicks submit button the submitInitials function is called
 
 
